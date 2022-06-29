@@ -1,0 +1,8 @@
+body {font-family: 'Montserrat',sans-serif;}
+.title{font-size: 56px;font-weight: 900; display: block;text-align: center;}
+.subtitle{font-size: 28px; font-weight: 900;display: block; text-align: center;}
+.ad__group{display:grid; gap: 48px; margin: auto; width: 100%; justify-items: center; justify-content: center; margin-top: 96px; margin-bottom: 96px;}
+.ad__label{text-align:center;  font-size: 12px; padding-bottom: 4px;}
+.ad__body{background-color: blue;}
+.ad{text-align: right;}
+.replay-button{width: 16px;padding: 8px;border: none;cursor: pointer; padding-right: 0;}
