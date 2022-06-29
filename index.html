@@ -1,12 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presto Testo</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <title>Document</title>
+  </head>
 <body>
-    
+  
+<div class="ad__group" x-data="ads"> 
+  
+  <div>
+    <span class="title" x-text="title"></span>
+    <span class="subtitle" x-text="subtitle"></span>
+  </div>
+
+  <template x-for="(ad,index) in adSizes" :key="index">
+    <div class="ad">
+      <div class="ad__label" x-text="`${ad[0]}x${ad[1]}`"></div>
+      <div class="ad__body" :class="`adNumber-${index}`" x-init=" doLottie(ad,index)" :style="`width: ${ad[0]}px; height:${ad[1]}px;`"></div>
+      <img class="replay-button" @click="lottie.stop('ad'+index); lottie.play('ad'+index)" src="/refresh.png">
+    </div>
+  </template>
+
+</div>
+
+
+<script>
+  document.addEventListener('alpine:init', () => {
+      Alpine.data('ads', () => ({
+
+        /////////// UPDATE CAMPAIGN DETAILS HERE /////////////////////////
+        
+        adSizes: [[300, 250],[320, 50],[300, 600],[160, 600],[728, 90],[970, 250]], 
+        title: "Canada RR",
+        subtitle: "Events-Las Vegas",
+
+        //////////////////////////////////////////////////////////////////
+
+        doLottie(ad,index) {
+          lottie
+            .loadAnimation({
+              container: document.querySelector("." + "adNumber-" + index),
+              autoplay: true,
+              loop: false,
+              renderer: "svg",
+              path: `${ad[0]}x${ad[1]}.json`,
+              name: 'ad'+index,
+              rendererSettings: {
+                filterSize: {
+                  width: "300%",
+                  height: "300%",
+                  x: "-100%",
+                  y: "-100%",
+                },
+              },
+            })
+            .setSubframe(false);
+        },
+        replay(){
+          console.log('bones')
+          lottie.play()
+        }
+      }))
+  })
+</script>
+
+
 </body>
 </html>
